@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso Completo de HTML - III Semestre</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #3b82f6;
+            --accent: #60a5fa;
+            --light: #f3f4f6;
+            --dark: #1f2937;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --dark-blue: #1e40af;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #e0f2fe, #dbeafe);
+            color: #334155;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            gap: 30px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--dark-blue));
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            margin-bottom: 30px;
+            border-radius: 0 0 15px 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 60%);
+            transform: rotate(30deg);
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .header-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        h2 {
+            color: var(--primary);
+            margin: 25px 0 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent);
+        }
+        
+        h3 {
+            color: var(--secondary);
+            margin: 20px 0 10px;
+        }
+        
+        h4 {
+            color: var(--dark-blue);
+            margin: 15px 0 8px;
+        }
+        
+        .sidebar {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+        
+        .sidebar ul {
+            list-style: none;
+        }
+        
+        .sidebar li {
+            margin-bottom: 12px;
+            position: relative;
+        }
+        
+        .sidebar a {
+            color: var(--dark);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+        
+        .sidebar a:hover {
+            background-color: var(--light);
+            color: var(--primary);
+            transform: translateX(5px);
+            border-left: 4px solid var(--primary);
+        }
+        
+        .sidebar i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        
+        .code-example {
+            background-color: #1e293b;
+            color: #f1f5f9;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow-x: auto;
+            font-family: 'Consolas', monospace;
+            line-height: 1.5;
+            position: relative;
+        }
+        
+        .code-example::before {
+            content: "HTML";
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: var(--primary);
+            color: white;
+            padding: 3px 10px;
+            font-size: 0.8rem;
+            border-radius: 0 10px 0 10px;
+        }
+        
+        .tag {
+            color: #7dd3fc;
+        }
+        
+        .attribute {
+            color: #f87171;
+        }
+        
+        .value {
+            color: #86efac;
+        }
+        
+        .comment {
+            color: #94a3b8;
+        }
+        
+        .example-box {
+            background-color: var(--light);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid var(--primary);
+        }
+        
+        .practice-box {
+            background-color: #dbeafe;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 30px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .practice-box::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: var(--primary);
+            opacity: 0.1;
+            border-radius: 50%;
+            transform: translate(40px, -40px);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        tr:hover {
+            background-color: #f1f5f9;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 30px;
+            color: #64748b;
+            font-size: 0.9rem;
+            background: white;
+            border-radius: 15px 15px 0 0;
+            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.05);
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        .tip {
+            background-color: #fffbeb;
+            border-left: 5px solid var(--warning);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .tip i {
+            color: var(--warning);
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .warning {
+            background-color: #fef2f2;
+            border-left: 5px solid var(--danger);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .warning i {
+            color: var(--danger);
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .success {
+            background-color: #ecfdf5;
+            border-left: 5px solid var(--success);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .success i {
+            color: var(--success);
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .example-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .example-item {
+            background: var(--light);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .example-output {
+            background: #1e293b;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+            min-height: 100px;
+        }
+        
+        .interactive-demo {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 2px dashed var(--accent);
+        }
+        
+        .demo-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 15px 0;
+        }
+        
+        .demo-box {
+            flex: 1;
+            min-width: 250px;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        @media (max-width: 900px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                order: 2;
+                position: relative;
+                top: 0;
+            }
+            
+            .content {
+                order: 1;
+            }
+            
+            .demo-container {
+                flex-direction: column;
+            }
+        }
+        
+        .progress-bar {
+            height: 5px;
+            background: var(--accent);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            z-index: 1000;
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+    
+    <header>
+        <div class="header-content">
+            <h1><i class="fas fa-code"></i> Curso Completo de HTML</h1>
+            <p>Para estudiantes de III Semestre - Desde lo básico hasta conceptos avanzados</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <aside class="sidebar">
+            <h3><i class="fas fa-bookmark"></i> Contenido del Curso</h3>
+            <ul>
+                <li><a href="#intro"><i class="fas fa-info-circle"></i> Introducción a HTML</a></li>
+                <li><a href="#estructura"><i class="fas fa-sitemap"></i> Estructura básica</a></li>
+                <li><a href="#texto"><i class="fas fa-font"></i> Elementos de texto</a></li>
+                <li><a href="#enlaces"><i class="fas fa-link"></i> Enlaces e imágenes</a></li>
+                <li><a href="#listas"><i class="fas fa-list"></i> Listas</a></li>
+                <li><a href="#tablas"><i class="fas fa-table"></i> Tablas</a></li>
+                <li><a href="#formularios"><i class="fas fa-edit"></i> Formularios</a></li>
+                <li><a href="#semantica"><i class="fas fa-cube"></i> HTML semántico</a></li>
+                <li><a href="#multimedia"><i class="fas fa-play-circle"></i> Multimedia</a></li>
+                <li><a href="#accesibilidad"><i class="fas fa-universal-access"></i> Accesibilidad</a></li>
+                <li><a href="#meta"><i class="fas fa-tags"></i> Metadatos</a></li>
+                <li><a href="#practica"><i class="fas fa-laptop-code"></i> Práctica integradora</a></li>
+            </ul>
+        </aside>
+        
+        <main class="content">
+            <section id="intro">
+                <h2><i class="fas fa-info-circle"></i> Introducción a HTML</h2>
+                <p>HTML (HyperText Markup Language) es el lenguaje estándar para crear páginas web. Describe la estructura de una página web mediante <strong>etiquetas</strong> (tags).</p>
+                
+                <div class="tip">
+                    <i class="fas fa-lightbulb"></i>
+                    <div>
+                        <p><strong>Tip:</strong> HTML no es un lenguaje de programación, es un lenguaje de marcado que define la estructura de tu contenido.</p>
+                    </div>
+                </div>
+                
+                <h3>Breve historia de HTML</h3>
+                <p>HTML fue creado por Tim Berners-Lee en 1991. La primera versión pública fue HTML 2.0 en 1995. HTML 4.01 se publicó en 1999 y fue una versión muy importante. HTML5, la versión actual, se publicó en 2014 y introdujo muchas características nuevas para soportar multimedia y aplicaciones web modernas.</p>
+                
+                <h3>Versiones de HTML</h3>
+                <table>
+                    <tr>
+                        <th>Versión</th>
+                        <th>Año</th>
+                        <th>Características principales</th>
+                    </tr>
+                    <tr>
+                        <td>HTML 2.0</td>
+                        <td>1995</td>
+                        <td>Primera versión estandarizada</td>
+                    </tr>
+                    <tr>
+                        <td>HTML 3.2</td>
+                        <td>1997</td>
+                        <td>Soporte para tablas y applets</td>
+                    </tr>
+                    <tr>
+                        <td>HTML 4.01</td>
+                        <td>1999</td>
+                        <td>Hojas de estilo, scripting, marcos</td>
+                    </tr>
+                    <tr>
+                        <td>XHTML 1.0</td>
+                        <td>2000</td>
+                        <td>HTML reformulado como XML</td>
+                    </tr>
+                    <tr>
+                        <td>HTML5</td>
+                        <td>2014</td>
+                        <td>Elementos semánticos, multimedia, APIs</td>
+                    </tr>
+                </table>
+            </section>
+            
+            <section id="estructura">
+                <h2><i class="fas fa-sitemap"></i> Estructura básica de un documento HTML</h2>
+                <p>Todo documento HTML sigue una estructura básica que incluye la declaración de tipo, html, head y body.</p>
+                
+                <div class="code-example">
+                    <pre><code><span class="tag">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html</span> <span class="attribute">lang</span>=<span class="value">"es"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+    <span class="tag">&lt;meta</span> <span class="attribute">charset</span>=<span class="value">"UTF-8"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;meta</span> <span class="attribute">name</span>=<span class="value">"viewport"</span> <span class="attribute">content</span>=<span class="value">"width=device-width, initial-scale=1.0"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;title&gt;</span>Mi primera página<span class="tag">&lt;/title&gt;</span>
+    <span class="comment">&lt;!-- Enlaces a hojas de estilo --&gt;</span>
+    <span class="tag">&lt;link</span> <span class="attribute">rel</span>=<span class="value">"stylesheet"</span> <span class="attribute">href</span>=<span class="value">"styles.css"</span><span class="tag">&gt;</span>
+    <span class="comment">&lt;!-- Scripts --&gt;</span>
+    <span class="tag">&lt;script</span> <span class="attribute">src</span>=<span class="value">"script.js"</span> <span class="attribute">defer</span><span class="tag">&gt;&lt;/script&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+<span class="tag">&lt;body&gt;</span>
+    <span class="comment">&lt;!-- Contenido de la página --&gt;</span>
+    <span class="tag">&lt;h1&gt;</span>¡Hola Mundo!<span class="tag">&lt;/h1&gt;</span>
+    <span class="tag">&lt;p&gt;</span>Este es mi primer párrafo.<span class="tag">&lt;/p&gt;</span>
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></code></pre>
+                </div>
+                
+                <div class="tip">
+                    <i class="fas fa-lightbulb"></i>
+                    <div>
+                        <p><strong>Importante:</strong> La declaración <code>&lt;!DOCTYPE html&gt;</code> debe ser lo primero en un documento HTML. Le indica al navegador que se trata de un documento HTML5.</p>
+                    </div>
+                </div>
+                
+                <h3>Partes de un elemento HTML</h3>
+                <div class="example-box">
+                    <p>Un elemento HTML generalmente consta de:</p>
+                    <ul>
+                        <li><strong>Etiqueta de apertura:</strong> &lt;nombre&gt;</li>
+                        <li><strong>Contenido:</strong> El contenido del elemento</li>
+                        <li><strong>Etiqueta de cierre:</strong> &lt;/nombre&gt;</li>
+                    </ul>
+                    <p>Algunos elementos, como &lt;img&gt;, son elementos vacíos y no tienen contenido ni etiqueta de cierre.</p>
+                </div>
+            </section>
+            
+            <section id="texto">
+                <h2><i class="fas fa-font"></i> Elementos de texto</h2>
+                <p>HTML proporciona múltiples etiquetas para formatear texto según su importancia y propósito.</p>
+                
+                <div class="example-box">
+                    <h1>Encabezado nivel 1 (h1)</h1>
+                    <h2>Encabezado nivel 2 (h2)</h2>
+                    <h3>Encabezado nivel 3 (h3)</h3>
+                    <h4>Encabezado nivel 4 (h4)</h4>
+                    <h5>Encabezado nivel 5 (h5)</h5>
+                    <h6>Encabezado nivel 6 (h6)</h6>
+                    <p>Este es un párrafo normal. <strong>Este texto es importante (strong)</strong>. <em>Este texto está enfatizado (em)</em>.</p>
+                    <p>Podemos <mark>resaltar texto</mark>, <small>hacerlo pequeño</small>, o <del>tacharlo</del>. También podemos <sup>superíndice</sup> y <sub>subíndice</sub>.</p>
+                    <p><code>Este es texto de código</code> y <kbd>esto es entrada de teclado</kbd>.</p>
+                    <blockquote>Este es un bloque de cita. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</blockquote>
+                    <pre>Texto preformateado
+    Conserva espacios
+        y saltos de línea</pre>
+                </div>
+                
+                <div class="code-example">
+                    <pre><code><span class="comment">&lt;!-- Encabezados --&gt;</span>
+<span class="tag">&lt;h1&gt;</span>Encabezado nivel 1<span class="tag">&lt;/h1&gt;</span>
+<span class="tag">&lt;h2&gt;</span>Encabezado nivel 2<span class="tag">&lt;/h2&gt;</span>
+<span class="tag">&lt;h3&gt;</span>Encabezado nivel 3<span class="tag">&lt;/h3&gt;</span>
+
+<span class="comment">&lt;!-- Párrafos y formato --&gt;</span>
+<span class="tag">&lt;p&gt;</span>Este es un párrafo normal. <span class="tag">&lt;strong&gt;</span>Este texto es importante<span class="tag">&lt;/strong&gt;</span>. <span class="tag">&lt;em&gt;</span>Este texto está enfatizado<span class="tag">&lt;/em&gt;</span>.<span class="tag">&lt;/p&gt;</span>
+<span class="tag">&lt;p&gt;</span>Podemos <span class="tag">&lt;mark&gt;</span>resaltar texto<span class="tag">&lt;/mark&gt;</span>, <span class="tag">&lt;small&gt;</span>hacerlo pequeño<span class="tag">&lt;/small&gt;</span>, o <span class="tag">&lt;del&gt;</span>tacharlo<span class="tag">&lt;/del&gt;</span>.<span class="tag">&lt;/p&gt;</span>
+
+<span class="comment">&lt;!-- Citas y código --&gt;</span>
+<span class="tag">&lt;blockquote&gt;</span>Esta es una cita larga...<span class="tag">&lt;/blade
+<footer>
+  <a href="java script.html">JS</a>
+</footer>
+

@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso Completo de JavaScript - III Semestre</title>
+    <style>
+        :root {
+            --primary: #dc2626;
+            --secondary: #ef4444;
+            --accent: #f87171;
+            --light: #fef2f2;
+            --dark: #7f1d1d;
+            --success: #10b981;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #fef2f2;
+            color: #334155;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            gap: 30px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 25px 0;
+            text-align: center;
+            margin-bottom: 30px;
+            border-radius: 0 0 15px 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        h2 {
+            color: var(--primary);
+            margin: 25px 0 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent);
+        }
+        
+        h3 {
+            color: var(--secondary);
+            margin: 20px 0 10px;
+        }
+        
+        .sidebar {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            height: fit-content;
+        }
+        
+        .sidebar ul {
+            list-style: none;
+        }
+        
+        .sidebar li {
+            margin-bottom: 12px;
+        }
+        
+        .sidebar a {
+            color: var(--dark);
+            text-decoration: none;
+            display: block;
+            padding: 10px 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .sidebar a:hover {
+            background-color: var(--light);
+            color: var(--primary);
+            transform: translateX(5px);
+        }
+        
+        .content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        
+        .code-example {
+            background-color: #1e293b;
+            color: #f1f5f9;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow-x: auto;
+            font-family: 'Consolas', monospace;
+            line-height: 1.5;
+        }
+        
+        .keyword {
+            color: #f87171;
+        }
+        
+        .function {
+            color: #7dd3fc;
+        }
+        
+        .string {
+            color: #86efac;
+        }
+        
+        .comment {
+            color: #94a3b8;
+        }
+        
+        .number {
+            color: #fbbf24;
+        }
+        
+        .example-box {
+            background-color: var(--light);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid var(--primary);
+        }
+        
+        .practice-box {
+            background-color: #fed7d7;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 30px 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        tr:hover {
+            background-color: #f1f5f9;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tip {
+            background-color: #fffbeb;
+            border-left: 5px solid #f59e0b;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .console {
+            background-color: #1e293b;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-family: 'Consolas', monospace;
+        }
+        
+        @media (max-width: 900px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                order: 2;
+            }
+            
+            .content {
+                order: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Curso Completo de JavaScript</h1>
+        <p>Para estudiantes de III Semestre - Desde lo básico hasta conceptos intermedios</p>
+    </header>
+    
+    <div class="container">
+        <aside class="sidebar">
+            <h3>Contenido del Curso</h3>
+            <ul>
+                <li><a href="#intro">Introducción a JavaScript</a></li>
+                <li><a href="#sintaxis">Sintaxis básica</a></li>
+                <li><a href="#variables">Variables y tipos de datos</a></li>
+                <li><a href="#operadores">Operadores</a></li>
+                <li><a href="#estructuras">Estructuras de control</a></li>
+                <li><a href="#funciones">Funciones</a></li>
+                <li><a href="#objetos">Objetos y arrays</a></li>
+                <li><a href="#dom">Manipulación del DOM</a></li>
+                <li><a href="#eventos">Manejo de eventos</a></li>
+                <li><a href="#ejercicios">Ejercicios prácticos</a></li>
+            </ul>
+        </aside>
+        
+        <main class="content">
+            <section id="intro">
+                <h2>Introducción a JavaScript</h2>
+                <p>JavaScript es un lenguaje de programación interpretado, dialecto del estándar ECMAScript. Se define como orientado a objetos, basado en prototipos, imperativo, débilmente tipado y dinámico.</p>
+                
+                <div class="tip">
+                    <p><strong>Dato importante:</strong> JavaScript no es lo mismo que Java. Son lenguajes diferentes con propósitos y características distintas.</p>
+                </div>
+                
+                <h3>¿Dónde se ejecuta JavaScript?</h3>
+                <p>JavaScript se puede ejecutar en:</p>
+                <ul>
+                    <li>Navegadores web (Chrome, Firefox, Safari, Edge)</li>
+                    <li>Servidores con Node.js</li>
+                    <li>Dispositivos móviles</li>
+                    <li>Bases de datos como MongoDB</li>
+                </ul>
+            </section>
+            
+            <section id="sintaxis">
+                <h2>Sintaxis básica de JavaScript</h2>
+                <p>La sintaxis de JavaScript es similar a otros lenguajes de programación como C, Java o C#.</p>
+                
+                <div class="code-example">
+                    <pre><code><span class="comment">// Esto es un comentario de una línea</span>
+
+<span class="comment">/*
+ Esto es un comentario
+ de múltiples líneas
+*/</span>
+
+<span class="comment">// Declaración de variable</span>
+<span class="keyword">let</span> mensaje = <span class="string">"Hola Mundo"</span>;
+
+<span class="comment">// Función simple</span>
+<span class="keyword">function</span> <span class="function">saludar</span>() {
+    <span class="keyword">return</span> <span class="string">"¡Hola!"</span>;
+}
+
+<span class="comment">// Mostrar resultado en consola</span>
+console.<span class="function">log</span>(mensaje);
+console.<span class="function">log</span>(<span class="function">saludar</span>());</code></pre>
+                </div>
+            </section>
+            
+            <section id="variables">
+                <h2>Variables y tipos de datos</h2>
+                <p>En JavaScript, tenemos tres formas de declarar variables: var, let y const.</p>
+                
+                <div class="code-example">
+                    <pre><code><span class="comment">// Variables con var (menos usada en código moderno)</span>
+<span class="keyword">var</span> nombre = <span class="string">"Juan"</span>;
+
+<span class="comment">// Variables con let (valor puede cambiar)</span>
+<span class="keyword">let</span> edad = <span class="number">25</span>;
+edad = <span class="number">26</span>; <span class="comment">// Esto es válido</span>
+
+<span class="comment">// Variables con const (valor constante)</span>
+<span class="keyword">const</span> PI = <span class="number">3.1416</span>;
+<span class="comment">// PI = 3.15; // Esto daría error</span>
+
+<span class="comment">// Tipos de datos primitivos</span>
+<span class="keyword">let</span> texto = <span class="string">"Hola"</span>; <span class="comment">// string</span>
+<span class="keyword">let</span> numero = <span class="number">42</span>; <span class="comment">// number</span>
+<span class="keyword">let</span> esMayor = <span class="keyword">true</span>; <span class="comment">// boolean</span>
+<span class="keyword">let</span> nada = <span class="keyword">null</span>; <span class="comment">// null</span>
+<span class="keyword">let</span> noDefinido; <span class="comment">// undefined</span>
+<span class="keyword">let</span> simbolo = <span class="function">Symbol</span>(<span class="string">'id'</span>); <span class="comment">// symbol</span></code></pre>
+                </div>
+                
+                <div class="tip">
+                    <p><strong>Recomendación:</strong> Usa <code>const</code> por defecto y solo <code>let</code> cuando necesites reasignar valores. Evita <code>var</code> en código moderno.</p>
+                </div>
+            </section>
+            
+            <section id="operadores">
+                <h2>Operadores en JavaScript</h2>
+                <p>JavaScript tiene operadores aritméticos, de comparación, lógicos y de asignación.</p>
+                
+                <div class="code-example">
+                    <pre><code><span class="comment">// Operadores aritméticos</span>
+<span class="keyword">let</span> suma = <span class="number">5</span> + <span class="number">3</span>; <span class="comment">// 8</span>
+<span class="keyword">let</span> resta = <span class="number">10</span> - <span class="number">4</span>; <span class="comment">// 6</span>
+<span class="keyword">let</span> multiplicacion = <span class="number">3</span> * <span class="number">4</span>; <span class="comment">// 12</span>
+<span class="keyword">let</span> division = <span class="number">20</span> / <span class="number">5</span>; <span class="comment">// 4</span>
+<span class="keyword">let</span> modulo = <span class="number">15</span> % <span class="number">4</span>; <span class="comment">// 3 (resto de la división)</span>
+
+<span class="comment">// Operadores de comparación</span>
+<span class="keyword">let</span> igual = <span class="number">5</span> == <span class="string">'5'</span>; <span class="comment">// true (igualdad débil)</span>
+<span class="keyword">let</span> estrictamenteIgual = <span class="number">5</span> === <span class="string">'5'</span>; <span class="comment">// false (igualdad estricta)</span>
+<span class="keyword">let</span> diferente = <span class="number">5</span> != <span class="string">'5'</span>; <span class="comment">// false</span>
+<span class="keyword">let</span> estrictamenteDiferente = <span class="number">5</span> !== <span class="string">'5'</span>; <span class="comment">// true</span>
+
+<span class="comment">// Operadores lógicos</span>
+<span class="keyword">let</span> and = (<span class="number">5</span> > <span class="number">3</span>) && (<span class="number">2</span> < <span class="number">4</span>); <span class="comment">// true</span>
+<span class="keyword">let</span> or = (<span class="number">5</span> > <span class="number">7</span>) || (<span class="number">3</span> < <span class="number">5</span>); <span class="comment">// true</span>
+<span class="keyword">let</span> not = !(<span class="number">5</span> > <span class="number">3</span>); <span class="comment">// false</span></code></pre>
+                </div>
+            </section>
+            
+            <section id="estructuras">
+                <h2>Estructuras de control</h2>
+                <p>Las estructuras de control permiten dirigir el flujo de ejecución del programa.</p>
+                
+                <h3>Condicionales</h3>
+                <div class="code-example">
+                    <pre><code><span class="comment">// if...else</span>
+<span class="keyword">let</span> edad = <span class="number">18</span>;
+
+<span class="keyword">if</span> (edad >= <span class="number">18</span>) {
+    console.<span class="function">log</span>(<span class="string">"Eres mayor de edad"</span>);
+} <span class="keyword">else</span> {
+    console.<span class="function">log</span>(<span class="string">"Eres menor de edad"</span>);
+}
+
+<span class="comment">// switch</span>
+<span class="keyword">let</span> dia = <span class="string">"Lunes"</span>;
+
+<span class="keyword">switch</span> (dia) {
+    <span class="keyword">case</span> <span class="string">"Lunes"</span>:
+        console.<span class="function">log</span>(<span class="string">"Inicio de semana"</span>);
+        <span class="keyword">break</span>;
+    <span class="keyword">case</span> <span class="string">"Viernes"</span>:
+        console.<span class="function">log</span>(<span class="string">"¡Fin de semana cerca!"</span>);
+        <span class="keyword">break</span>;
+    <span class="keyword">default</span>:
+        console.<span class="function">log</span>(<span class="string">"Día normal"</span>);
+}</code></pre>
+                </div>
+                
+                <h3>Bucles</h3>
+                <div class="code-example">
+                    <pre><code><span class="comment">// for</span>
+<span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i < <span class="number">5</span>; i++) {
+    console.<span class="function">log</span>(<span class="string">"Iteración número: "</span> + i);
+}
+
+<span class="comment">// while</span>
+<span class="keyword">let</span> contador = <span class="number">0</span>;
+<span class="keyword">while</span> (contador < <span class="number">3</span>) {
+    console.<span class="function">log</span>(<span class="string">"Contador: "</span> + contador);
+    contador++;
+}
+
+<span class="comment">// do...while</span>
+<span class="keyword">let</span> x = <span class="number">0</span>;
+<span class="keyword">do</span> {
+    console.<span class="function">log</span>(<span class="string">"Valor de x: "</span> + x);
+    x++;
+} <span class="keyword">while</span> (x < <span class="number">3</span>);</code></pre>
+                </div>
+            </section>
+            
+            <section id="funciones">
+                <h2>Funciones en JavaScript</h2>
+                <p>Las funciones son bloques de código reutilizables que realizan una tarea específica.</p>
+                
+                <div class="code-example">
+                    <pre><code><span class="comment">// Declaración de función</span>
+<span class="keyword">function</span> <span class="function">sumar</span>(a, b) {
+    <span class="keyword">return</span> a + b;
+}
+
+<span class="comment">// Expresión de función</span>
+<span class="keyword">const</span> multiplicar = <span class="keyword">function</span>(a, b) {
+    <span class="keyword">return</span> a * b;
+};
+
+<span class="comment">// Función flecha (arrow function) - ES6</span>
+<span class="keyword">const</span> dividir = (a, b) => {
+    <span class="keyword">return</span> a / b;
+};
+
+<span class="comment">// Función flecha con retorno implícito</span>
+<span class="keyword">const</span> cuadrado = n => n * n;
+
+<span class="comment">// Llamando a las funciones</span>
+console.<span class="function">log</span>(<span class="function">sumar</span>(<span class="number">5</span>, <span class="number">3</span>)); <span class="comment">// 8</span>
+console.<span class="function">log</span>(<span class="function">multiplicar</span>(<span class="number">4</span>, <span class="number">5</span>)); <span class="comment">// 20</span>
+console.<span class="function">log</span>(<span class="function">dividir</span>(<span class="number">10</span>, <span class="number">2</span>)); <span class="comment">// 5</span>
+console.<span class="function">log</span>(<span class="function">cuadrado</span>(<span class="number">6</span>)); <span class="comment">// 36</span></code></pre>
+                </div>
+            </section>
+            
+            <section id="objetos">
+                <h2>Objetos y arrays</h2>
+                <p>Los objetos y arrays son estructuras de datos fundamentales en JavaScript.</p>
+                
+                <h3>Arrays</h3>
+                <div class="code-example">
+                    <pre><code><span class="comment">// Creación de arrays</span>
+<span class="keyword">let</span> frutas = [<span class="string">"manzana"</span>, <span class="string">"banana"</span>, <span class="string">"naranja"</span>];
+<span class="keyword">let</span> numeros = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];
+
+<span class="comment">// Acceder a elementos</span>
+console.<span class="function">log</span>(frutas[<span class="number">0</span>]); <span class="comment">// "manzana"</span>
+console.<span class="function">log</span>(numeros[<span class="number">2</span>]); <span class="comment">// 3</span>
+
+<span class="comment">// Métodos comunes de arrays</span>
+frutas.<span class="function">push</span>(<span class="string">"uva"</span>); <span class="comment">// Añade al final</span>
+frutas.<span class="function">pop</span>(); <span class="comment">// Elimina el último elemento</span>
+frutas.<span class="function">unshift</span>(<span class="string">"fresa"</span>); <span class="comment">// Añade al inicio</span>
+<span class="keyword">let</span> longitud = frutas.<span class="function">length</span>; <span class="comment">// Longitud del array</span></code></pre>
+                </div>
+                
+                <h3>Objetos</h3>
+                <div class="code-example">
+                    <pre><code><span class="comment">// Creación de objetos</span>
+<span class="keyword">let</span> persona = {
+    nombre: <span class="string">"Ana"</span>,
+    edad: <span class="number">30</span>,
+    ciudad: <span class="string">"Madrid"</span>,
+    saludar: <span class="keyword">function</span>() {
+        <span class="keyword">return</span> <span class="string">"Hola, soy "</span> + <span class="keyword">this</span>.nombre;
+    }
+};
+
+<span class="comment">// Acceder a propiedades</span>
+console.<span class="function">log</span>(persona.nombre); <span class="comment">// "Ana"</span>
+console.<span class="function">log</span>(persona[<span class="string">"edad"</span>]); <span class="comment">// 30</span>
+
+<footer>
+  <a href="html.html">html</a>
+</footer>
